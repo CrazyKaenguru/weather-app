@@ -40,13 +40,16 @@
             <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
             <input type="submit" class="ghost-button" value="Get Weather">
           </form>
+          <form action="/weather" method="post" id="uselocationform">
+            <input id="latholder" name="lat" type="hidden" value="" >
+            <input id="lonholder" name="lon" type="hidden" value="mm" >
+            <input  type="submit" class="ghost-button" value="Use my location" >
+            
+          </form>
       
           <!-- Upon fetching of data you will display it -->
           <%if( weather !== null){ %>
           <div id="time" class="grid">
-            <p>
-              <%= place %>
-            </p>
             <p>
                 <%= place %>
               </p>
@@ -126,7 +129,7 @@
     <script>
         
      var infullscreen=false;
-    // document.getElementById("fullscreenbutton").style.display="none"
+    
   function fullscreen()
   {
     
@@ -138,12 +141,22 @@
     {
         document.getElementById("time").style.visibility="hidden"
         document.getElementById("inputform").style.display="none"
+        document.getElementById("uselocationform").style.display="none"
         document.documentElement.requestFullscreen () 
         document.getElementsByTagName('body')[0].style.fontSize="35px";
     }
 
             infullscreen=!infullscreen
   }
+  navigator.geolocation.getCurrentPosition(function(location) {
+    document.getElementById("latholder").value=location.coords.latitude
+    document.getElementById("lonholder").value=location.coords.longitude
+  
+});
+ 
+  
+
+
     </script>
 
     
