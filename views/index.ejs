@@ -54,7 +54,7 @@
       
           <!-- You can find other data fetched by the app on the console in JSON form and display it as you please -->
           <div class="card-deck" >
-            <div class="card card-accent-dark mb-3" style="max-width: 18rem;">
+            <div class="card card-accent-dark mb-3" style="max-width: 20rem;">
               <div class="card-header">Summary</div>
               <div class="card-body text-dark">
                 <img src="<%= icon %>" alt="Weather-Icon">
@@ -71,7 +71,7 @@
               </div>
             </div>
             <div class="card-deck" >
-              <div class="card card-acTomorrowcent-dark mb-3" style="max-width: 18rem;">
+              <div class="card card-acTomorrowcent-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header">Description</div>
                 <div class="card-body text-dark">
                   <h5 class="card-title">Overall Description: </h5>
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div class="card-deck" >
-                <div class="card card-accent-dark mb-3" style="max-width: 18rem;">
+                <div class="card card-accent-dark mb-3" style="max-width: 25rem;">
                   <div class="card-header">Other info</div>
                   <div class="card-body text-dark">
                     <h5 class="card-title">Humidity: </h5>
@@ -113,14 +113,17 @@
                 <%= error %>
               </p>
               <% } %>
+              
         </fieldset>
+        <%if( weather !== null){ %>
         <button  id="fullscreenbutton"type="button" class="btn btn-secondary" onclick="fullscreen()">presentation-mode</button>
+        <% } %>
         <br><br>
       </div>
     <script>
         
      var infullscreen=false;
-     
+    // document.getElementById("fullscreenbutton").style.display="none"
   function fullscreen()
   {
     
@@ -132,7 +135,7 @@
     {
         document.getElementById("time").style.visibility="hidden"
         document.getElementById("inputform").style.display="none"
-        //document.documentElement.requestFullscreen () 
+        document.documentElement.requestFullscreen () 
         document.getElementsByTagName('body')[0].style.fontSize="45px";
     }
 
