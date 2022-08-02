@@ -8,7 +8,7 @@ const app = express();
 require("dotenv").config();
 
 const apiKey = `${process.env.API_KEY}`;
-console.log(apiKey)
+
 
 // Setup your express app and body-parser configurations
 // Setup your javascript template view engine
@@ -21,7 +21,7 @@ app.get("/", function (req, res) {
     res.render("index", { weather: null, error: null });
   });
 
-  app.post('/', function(req, res) {
+  app.post('/weather', function(req, res) {
 
     // Get city name passed in the form
     let city = req.body.city;
@@ -85,6 +85,6 @@ app.get("/", function (req, res) {
       });
  
 
-  app.listen(process.env.PORT, function () {
+  app.listen(process.env.PORT||5000, function () {
     console.log("Weather app listening on port 5000!");
   });

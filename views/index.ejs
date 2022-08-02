@@ -36,14 +36,14 @@
         <!-- This shall hold the input fields and the output data -->
         <fieldset>
           <!-- This form shall be used to fetch your city name -->
-          <form action="/" method="post">
+          <form action="/weather" method="post" id="inputform">
             <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
             <input type="submit" class="ghost-button" value="Get Weather">
           </form>
       
           <!-- Upon fetching of data you will display it -->
           <%if( weather !== null){ %>
-          <div class="grid">
+          <div id="time" class="grid">
             <p>
               <%= place %>
             </p>
@@ -53,7 +53,7 @@
           </div>
       
           <!-- You can find other data fetched by the app on the console in JSON form and display it as you please -->
-          <div class="card-deck">
+          <div class="card-deck" >
             <div class="card card-accent-dark mb-3" style="max-width: 18rem;">
               <div class="card-header">Summary</div>
               <div class="card-body text-dark">
@@ -70,7 +70,7 @@
                 </p>
               </div>
             </div>
-            <div class="card-deck">
+            <div class="card-deck" >
               <div class="card card-acTomorrowcent-dark mb-3" style="max-width: 18rem;">
                 <div class="card-header">Description</div>
                 <div class="card-body text-dark">
@@ -88,7 +88,7 @@
                   </p>
                 </div>
               </div>
-              <div class="card-deck">
+              <div class="card-deck" >
                 <div class="card card-accent-dark mb-3" style="max-width: 18rem;">
                   <div class="card-header">Other info</div>
                   <div class="card-body text-dark">
@@ -114,8 +114,33 @@
               </p>
               <% } %>
         </fieldset>
+        <button  id="fullscreenbutton"type="button" class="btn btn-secondary" onclick="fullscreen()">presentation-mode</button>
+        <br><br>
       </div>
-    <!-- Optional JavaScript -->
+    <script>
+        
+     var infullscreen=false;
+     
+  function fullscreen()
+  {
+    
+    if(infullscreen==true)
+    {
+        location.reload()  
+    }
+    else
+    {
+        document.getElementById("time").style.visibility="hidden"
+        document.getElementById("inputform").style.display="none"
+        //document.documentElement.requestFullscreen () 
+        document.getElementsByTagName('body')[0].style.fontSize="45px";
+    }
+
+            infullscreen=!infullscreen
+  }
+    </script>
+
+    
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
