@@ -85,6 +85,6 @@ app.get("/", function (req, res) {
       });
  
 
-  app.listen(5000, function () {
+  app.listen(process.env.PORT, function () {
     console.log("Weather app listening on port 5000!");
   });
