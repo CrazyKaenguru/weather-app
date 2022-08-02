@@ -90,6 +90,6 @@ app.post("/weather", function (req, res) {
   });
 });
 
-app.listen(process.env.PORT || 5000, function () {
+app.listen(process.env.PORT , function () {
   console.log("Weather app listening on port 5000!");
 });
