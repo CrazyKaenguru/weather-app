@@ -43,7 +43,7 @@
           <form action="/weather" method="post" id="uselocationform">
             <input id="latholder" name="lat" type="hidden" value="" >
             <input id="lonholder" name="lon" type="hidden" value="mm" >
-            <input  type="submit" class="ghost-button" value="Use my location" >
+            <input onmouseover="getPosition()"   type="submit" class="ghost-button" value="Use my location" >
             
           </form>
       
@@ -148,11 +148,15 @@
 
             infullscreen=!infullscreen
   }
+  function getPosition()
+  {
   navigator.geolocation.getCurrentPosition(function(location) {
     document.getElementById("latholder").value=location.coords.latitude
     document.getElementById("lonholder").value=location.coords.longitude
   
 });
+  }
+  
  
   
 
