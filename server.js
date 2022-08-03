@@ -20,10 +20,12 @@ app.get("/", function (req, res) {
 });
 
 app.post("/weather", function (req, res) {
+  console.log(req.body)
   let city = req.body.city;
 
   let geourl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${req.body.lat}&lon=${req.body.lon}&appid=${apiKey}`;
   request(geourl, function (err, response, body) {
+    console.log(JSON.parse(body))
     if (city == undefined) {
       city = JSON.parse(body)[0].name;
     }

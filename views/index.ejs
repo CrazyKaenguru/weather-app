@@ -40,7 +40,7 @@
             <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
             <input type="submit" class="ghost-button" value="Get Weather">
           </form>
-          <form action="/weather" method="post" id="uselocationform">
+          <form action="/weather" method="post" id="uselocationform" name="mylocationform">
             <input id="latholder" name="lat" type="hidden" value="" >
             <input id="lonholder" name="lon" type="hidden" value="mm" >
             <input id="mylocationbutton" onclick="getPosition()"   type="button" class="ghost-button" value="Use my location" >
@@ -148,16 +148,31 @@
 
             infullscreen=!infullscreen
   }
-  function getPosition()
+  async function getPosition()
   {
-  navigator.geolocation.getCurrentPosition(function(location) {
+  await navigator.geolocation.getCurrentPosition(function(location) {
     document.getElementById("latholder").value=location.coords.latitude
     document.getElementById("lonholder").value=location.coords.longitude
-    document.getElementById("mylocationbutton").type="submit"
-  
+    console.log("location set in form")
+});
+ navigator.permissions.query({name:'geolocation'}).then(function(result) {
+  // Will return ['granted', 'prompt', 'denied']
+  if(result.state=="granted")
+  { 
+
+    console.log("form submitteed")
+    setTimeout(function(){
+      document.mylocationform.submit()
+}, 200);
+   
+  }
 });
 
+ 
   }
+  
+ 
+
    
  
   
