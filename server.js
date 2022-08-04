@@ -32,7 +32,7 @@ app.post("/weather", function (req, res) {
      }
      catch(err)
      {
-      console.
+      console.log("error with location")
       res.render("index", {
         weather: null,
         error: "Error with location, please try again",
