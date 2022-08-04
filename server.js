@@ -32,12 +32,12 @@ app.post("/weather", function (req, res) {
      }
      catch(err)
      {
+      console.
       res.render("index", {
         weather: null,
         error: "Error with location, please try again",
       });
       res.end()
-      return
      }
     }
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
