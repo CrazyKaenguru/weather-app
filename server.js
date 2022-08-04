@@ -19,27 +19,38 @@ app.get("/", function (req, res) {
   res.render("index", { weather: null, error: null });
 });
 
+app.get("/forecast",function(req,res){
+
+});
 app.post("/weather", function (req, res) {
   console.log(req.body)
   let city = req.body.city;
  
   let geourl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${req.body.lat}&lon=${req.body.lon}&appid=${apiKey}`;
-  request(geourl, function (err, response, body) {
+  request(geourl, function (err, response, geobody) {
     if (city == undefined) {
-      city = JSON.parse(body)[0].name;
+
+      city = JSON.parse(geobody)[0].name;
     }
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     request(url, function (err, response, body) {
       if (err) {
+        console.log("the error is"+err)
         res.render("index", {
           weather: null,
           error: "Error, please try again",
         });
       } else {
-        console.log(JSON.parse(body));
+        let forecasturl=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=4&appid=ff45b3813adda031c90088df092030e9`
+        request(forecasturl, function (err, response, forecastbody) {
+          let forecast=JSON.parse(forecastbody)
+          //console.log(forecast.list[0].dt_txt)
+        
+       console.log(forecast)
         let weather = JSON.parse(body);
-
+         
         if (weather.main == undefined) {
+          console.log("the error is"+err)
           res.render("index", {
             weather: null,
             error: "Error, please try again",
@@ -53,6 +64,21 @@ app.post("/weather", function (req, res) {
             )}`;
           let weatherTemp = `${weather.main.temp}`,
             weatherPressure = `${weather.main.pressure}`,
+            time_1=(forecast.list[0].dt_txt).split(" ").pop(),
+            time_2=(forecast.list[1].dt_txt).split(" ").pop(),
+            time_3=(forecast.list[2].dt_txt).split(" ").pop(),
+            time_4=(forecast.list[3].dt_txt).split(" ").pop(),
+            time_1_weather_description=forecast.list[0].weather[0].description,
+            time_2_weather_description=forecast.list[1].weather[0].description,
+            time_3_weather_description=forecast.list[2].weather[0].description,
+            time_4_weather_description=forecast.list[3].weather[0].description,
+            time_1_weather_icon=forecast.list[0].weather[0].icon,
+            time_2_weather_icon=forecast.list[1].weather[0].icon,
+            time_3_weather_icon=forecast.list[1].weather[0].icon,
+            time_4_weather_icon=forecast.list[1].weather[0].icon,
+           // time_3_weather_icon=forecast.list[2].weather[0].description,
+           // time_4_weather_icon=forecast.list[3].weather[0].description,
+            
             /* you will fetch the weather icon and its size using the icon data*/
             weatherIcon = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
             weatherDescription = `${weather.weather[0].description}`,
@@ -62,7 +88,7 @@ app.post("/weather", function (req, res) {
             main = `${weather.weather[0].main}`,
             weatherFahrenheit;
           weatherFahrenheit = (weatherTemp * 9) / 5 + 32;
-
+          
           // you shall also round off the value of the degrees fahrenheit calculated into two decimal places
           function roundToTwo(num) {
             return +(Math.round(num + "e+2") + "e-2");
@@ -81,11 +107,26 @@ app.post("/weather", function (req, res) {
             clouds: clouds,
             visibility: visibility,
             main: main,
+            time_1:time_1,
+            time_2:time_2,
+            time_3:time_3,
+            time_4:time_4,
+            time_1_weather_description:time_1_weather_description,
+            time_2_weather_description:time_2_weather_description,
+            time_3_weather_description:time_3_weather_description,
+            time_4_weather_description:time_4_weather_description,
+            time_1_weather_icon:time_1_weather_icon,
+            time_2_weather_icon:time_2_weather_icon,
+            time_3_weather_icon:time_3_weather_icon,
+            time_4_weather_icon:time_4_weather_icon,
             error: null,
           });
+          
         }
+      });
       }
     });
+    
   });
 });
 

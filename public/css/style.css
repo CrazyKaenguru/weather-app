@@ -82,3 +82,7 @@ body {
   p {
     color: #e64a19;
   }
+  .weatherimg{
+    max-width: 15%;
+    max-height: 15%;
+  }
