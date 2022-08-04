@@ -86,10 +86,8 @@ app.post("/weather", function (req, res) {
             time_2_weather_icon=forecast.list[1].weather[0].icon,
             time_3_weather_icon=forecast.list[1].weather[0].icon,
             time_4_weather_icon=forecast.list[1].weather[0].icon,
-           // time_3_weather_icon=forecast.list[2].weather[0].description,
-           // time_4_weather_icon=forecast.list[3].weather[0].description,
+        
             
-            /* you will fetch the weather icon and its size using the icon data*/
             weatherIcon = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
             weatherDescription = `${weather.weather[0].description}`,
             humidity = `${weather.main.humidity}`,
