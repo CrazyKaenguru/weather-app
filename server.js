@@ -19,9 +19,7 @@ app.get("/", function (req, res) {
   res.render("index", { weather: null, error: null });
 });
 
-app.get("/forecast",function(req,res){
 
-});
 app.post("/weather", function (req, res) {
   console.log(req.body)
   let city = req.body.city;
@@ -38,6 +36,7 @@ app.post("/weather", function (req, res) {
         weather: null,
         error: "Error with location, please try again",
       });
+      res.end()
       return
      }
     }
