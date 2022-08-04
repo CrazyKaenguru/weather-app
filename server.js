@@ -48,6 +48,8 @@ app.post("/weather", function (req, res) {
           weather: null,
           error: "Error, please try again",
         });
+        res.end()
+        return
       } else {
         let forecasturl=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=4&appid=ff45b3813adda031c90088df092030e9`
         request(forecasturl, function (err, response, forecastbody) {
