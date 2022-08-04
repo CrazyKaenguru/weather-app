@@ -54,7 +54,7 @@ app.post("/weather", function (req, res) {
         let forecasturl=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=4&appid=ff45b3813adda031c90088df092030e9`
         request(forecasturl, function (err, response, forecastbody) {
           let forecast=JSON.parse(forecastbody)
-          console.log(forecast.list[0].main)
+         
         
        //console.log(forecast)
         let weather = JSON.parse(body);
