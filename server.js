@@ -29,8 +29,17 @@ app.post("/weather", function (req, res) {
   let geourl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${req.body.lat}&lon=${req.body.lon}&appid=${apiKey}`;
   request(geourl, function (err, response, geobody) {
     if (city == undefined) {
-
+     try{
       city = JSON.parse(geobody)[0].name;
+     }
+     catch(err)
+     {
+      res.render("index", {
+        weather: null,
+        error: "Error with location, please try again",
+      });
+      return
+     }
     }
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     request(url, function (err, response, body) {
@@ -44,9 +53,9 @@ app.post("/weather", function (req, res) {
         let forecasturl=`http://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=4&appid=ff45b3813adda031c90088df092030e9`
         request(forecasturl, function (err, response, forecastbody) {
           let forecast=JSON.parse(forecastbody)
-          //console.log(forecast.list[0].dt_txt)
+          console.log(forecast.list[0].main)
         
-       console.log(forecast)
+       //console.log(forecast)
         let weather = JSON.parse(body);
          
         if (weather.main == undefined) {
